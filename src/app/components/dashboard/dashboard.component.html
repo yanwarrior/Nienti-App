@@ -1,0 +1,64 @@
+<app-navigation></app-navigation>
+<div class="container" style="margin-top: 37px;">
+  <h4 class="display-4 text-center" style="margin-top: 6px;font-size: 40px;">Welcome, {{ userService.userSubject.value.username }}</h4>
+</div>
+
+<div class="container mb-4" style="margin-bottom: 35px;">
+  <p class="lead text-center" style="font-size: 18px;">Manage your supplier, customer, and more to make Nienti work better for you<br /></p>
+</div>
+
+<div class="container" style="margin-top: 48px;">
+  <div class="row">
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Supplier</h4>
+                  <p class="text-secondary card-text">
+                    Nullam id dolor id nibh ultricies vehicula ut id elit.
+                  </p>
+                  <a class="card-link" [routerLink]="['/suppliers']">Manage your supplier</a>
+                </div>
+          </div>
+      </div>
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Customer</h4>
+                  <p class="text-secondary card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p><a class="card-link" href="#">Manage your customer</a></div>
+          </div>
+      </div>
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Product</h4>
+                  <p class="text-secondary card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p><a class="card-link" href="#">Manage your product</a></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 30px;">
+  <div class="row">
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Sales</h4>
+                  <p class="text-secondary card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p><a class="card-link" href="#">Manage your sales</a></div>
+          </div>
+      </div>
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Purchases</h4>
+                  <p class="text-secondary card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p><a class="card-link" href="#">Manage your purchase</a></div>
+          </div>
+      </div>
+      <div class="col-4">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Reports</h4>
+                  <p class="text-secondary card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p><a class="card-link" href="#">Show reports</a></div>
+          </div>
+      </div>
+  </div>
+</div>

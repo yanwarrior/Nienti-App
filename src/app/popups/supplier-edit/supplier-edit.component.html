@@ -1,0 +1,32 @@
+<div *ngIf="supplier" role="dialog" tabindex="-1" class="modal d-block" style="display: block;">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="display-4 modal-title" style="font-size: 24px;">
+              {{ supplier.name }}
+            </h4>
+            <button (click)="activeModal.dismiss('Cross click')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label>Supplier Name</label>
+                <input [(ngModel)]="supplier.name" type="text" class="bg-light form-control" />
+              </div>
+              <div class="form-group">
+                <label>Supplier Phone</label>
+                <input [(ngModel)]="supplier.phone" type="tel" class="bg-light form-control" />
+              </div>
+              <div class="form-group">
+                <label>Supplier Address</label>
+                <textarea [(ngModel)]="supplier.address" class="bg-light form-control"></textarea>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button (click)="activeModal.close('Close click')" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+            <button (click)="update()" class="btn btn-success" type="button">Save</button>
+          </div>
+      </div>
+  </div>
+</div>

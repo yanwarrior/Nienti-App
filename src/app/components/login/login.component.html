@@ -1,0 +1,60 @@
+<div class="container-md" style="margin-top: 82px;background-color: #f9f9f9;">
+  <div 
+    class="row d-xl-flex justify-content-center" 
+    style="background-color:
+    #f4f4f4;"
+  >
+    <div class="col-4">
+      <div class="card border-light shadow">
+        <div class="card-body">
+          <h4 class="display-4 text-center text-success card-title">
+            Nienti
+          </h4>
+          <h6 class="text-center text-muted card-subtitle mb-2">
+            Sale &amp; Purchasing Software
+          </h6>
+          <div style="margin-bottom: 21px;"></div>
+
+          <label>Username</label>
+          <div class="form-group">
+            <input 
+              [(ngModel)]="user.username"
+              type="text" 
+              class="bg-light
+              form-control" 
+              placeholder="Insert your username"
+              autocomplete="off"
+            />
+          </div>
+
+          <label>Password</label>
+          <div class="form-group">
+            <input 
+              [(ngModel)]="user.password"
+              type="password"
+              class="bg-light form-control"
+              placeholder="Input your password"
+            />
+          </div>
+
+          <div style="margin-top: 30px;"></div>
+          
+          <button 
+            class="btn btn-success btn-block btn-lg border rounded"
+            type="button"
+            (click)="login()"
+          >
+            Login
+          </button>
+          <hr />
+            <small 
+              class="form-text text-center text-muted"
+              style="margin-top: 12px;"
+            >
+              If you forgot password, please contact administrator system
+            </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
