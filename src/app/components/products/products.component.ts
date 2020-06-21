@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductPaginationInterface } from 'src/app/interfaces/products';
 import { ProductService } from 'src/app/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
 
 @Component({
   selector: 'app-products',
@@ -70,5 +71,18 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
+
+  public create() {
+    this.modalService.open(ProductCreateComponent).result.then(
+      (result) => {
+        this.all();
+      },
+      (reason) => {
+        // This reason must be definition
+        // because error when i not definition
+        console.log(reason);
+      }
+    );
+}
 
 }

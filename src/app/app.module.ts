@@ -17,6 +17,8 @@ import { SupplierCreateComponent } from './popups/supplier-create/supplier-creat
 import { SupplierEditComponent } from './popups/supplier-edit/supplier-edit.component';
 import { SupplierDeleteComponent } from './popups/supplier-delete/supplier-delete.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductCreateComponent } from './popups/product-create/product-create.component';
+import { ProductEditComponent } from './popups/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ProductsComponent } from './components/products/products.component';
     SupplierEditComponent,
     SupplierDeleteComponent,
     ProductsComponent,
+    ProductCreateComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,
