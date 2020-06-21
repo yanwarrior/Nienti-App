@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductPaginationInterface } from 'src/app/interfaces/products';
+import { ProductPaginationInterface, ProductInterface } from 'src/app/interfaces/products';
 import { ProductService } from 'src/app/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
+import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.component';
 
 @Component({
   selector: 'app-products',
@@ -83,6 +84,11 @@ export class ProductsComponent implements OnInit {
         console.log(reason);
       }
     );
-}
+  }
+
+  public update(product: ProductInterface) {
+    const modalRef = this.modalService.open(ProductEditComponent);
+    modalRef.componentInstance.product = product;
+  }
 
 }

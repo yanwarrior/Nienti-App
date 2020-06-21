@@ -52,7 +52,10 @@
                       <p class="lead" style="font-size: 14px;">{{ product.price | currency:'Rp. ':'symbol':'3.0' }}</p>
                     </div>
                     <div class="col text-right d-lg-flex justify-content-lg-end align-items-lg-center">
-                        <div role="group" class="btn-group"><button class="btn btn-outline-light text-dark" type="button">Delete</button><button class="btn btn-success" type="button">Edit</button></div>
+                      <div role="group" class="btn-group">
+                        <button class="btn btn-outline-light text-dark" type="button">Delete</button>
+                        <button (click)="update(product)" class="btn btn-success" type="button">Edit</button>
+                      </div>
                     </div>
                 </div>
               </li>
