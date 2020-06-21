@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductPaginationInterface, ProductPaginationSerializer, ProductInterface } from '../interfaces/products';
+import { ProductPaginationInterface, ProductInterface } from '../interfaces/products';
 import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({

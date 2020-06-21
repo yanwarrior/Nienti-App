@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SupplierComponent } from './components/supplier/supplier.component';
+import { ProductsComponent } from './components/products/products.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'suppliers',
     component: SupplierComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

@@ -19,9 +19,3 @@ export class ProductSerializer implements ProductInterface {
   price: number;
   stock: number;
 }
-
-export class ProductPaginationSerializer implements ProductPaginationInterface {
-  previous: string;
-  next: string;
-  results: ProductInterface[];
-}
