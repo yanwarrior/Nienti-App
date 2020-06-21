@@ -16,6 +16,7 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { SupplierCreateComponent } from './popups/supplier-create/supplier-create.component';
 import { SupplierEditComponent } from './popups/supplier-edit/supplier-edit.component';
 import { SupplierDeleteComponent } from './popups/supplier-delete/supplier-delete.component';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SupplierDeleteComponent } from './popups/supplier-delete/supplier-delet
     SupplierCreateComponent,
     SupplierEditComponent,
     SupplierDeleteComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +40,19 @@ import { SupplierDeleteComponent } from './popups/supplier-delete/supplier-delet
         tokenGetter: (): string | any => {
           return localStorage.getItem('token');
         },
-        whitelistedDomains: ['localhost:8000'],
-        blacklistedRoutes: ['http://localhost:8000/login/', 'http://localhost:8000/refresh/']
+        whitelistedDomains: [
+          'localhost:8000',
+          '0.0.0.0:8000',
+          '192.168.43.60:8000',
+        ],
+        blacklistedRoutes: [
+          'http://localhost:8000/login/',
+          'http://localhost:8000/refresh/',
+          'http://0.0.0.0:8000/login/',
+          'http://0.0.0.0:8000/refresh/',
+          'http://192.168.43.60:8000/login/',
+          'http://192.168.43.60:8000/refresh/',
+        ]
       }
     }),
     BrowserAnimationsModule,
