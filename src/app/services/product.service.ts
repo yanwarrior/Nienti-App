@@ -35,8 +35,13 @@ export class ProductService {
       );
   }
 
-  paginate(cursor: string): Observable<ProductPaginationInterface> {
-    return this.httpClient.get<ProductPaginationInterface>(cursor, this.baseService.httpOptions)
+  paginate(page: string, search: string = ''): Observable<ProductPaginationInterface> {
+    this.baseService.httpOptions['params'] = new HttpParams()
+      .set('page', page)
+      .set('search', search);
+    const url: string = `${this.baseService.baseUrl}/products/`;
+    
+    return this.httpClient.get<ProductPaginationInterface>(url, this.baseService.httpOptions)
       .pipe(
         retry(2),
         catchError(this.baseService.handleError)
@@ -45,6 +50,7 @@ export class ProductService {
 
   create(product: ProductInterface): Observable<ProductInterface> {
     const url: string = `${this.baseService.baseUrl}/products/`;
+    delete this.baseService.httpOptions['params'];
     return this.httpClient.post<ProductInterface>(url, product, this.baseService.httpOptions)
       .pipe(
         retry(2),
@@ -53,7 +59,8 @@ export class ProductService {
   }
 
   update(product: ProductInterface): Observable<ProductInterface> {
-    const url: string = `${this.baseService.baseUrl}/products/`;
+    const url: string = `${this.baseService.baseUrl}/products/${product.id}/`;
+    delete this.baseService.httpOptions['params'];
     return this.httpClient.put<ProductInterface>(url, product, this.baseService.httpOptions)
       .pipe(
         retry(2),

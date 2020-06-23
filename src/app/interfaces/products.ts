@@ -9,6 +9,7 @@ export interface ProductInterface {
 export interface ProductPaginationInterface {
   previous: string;
   next: string;
+  count: number;
   results: ProductInterface[];
 }
 

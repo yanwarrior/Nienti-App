@@ -1,4 +1,76 @@
-<app-navigation></app-navigation>
+<app-navigation>
+  <app-subnav subnav>
+    <h1>Suppliers</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+      Odit dolorum in, consectetur nihil.
+    </p>
+    <button (click)="create()" class="btn btn-light">
+      New Supplier
+    </button>
+  </app-subnav>
+  <app-empty *ngIf="!suppliers"></app-empty>
+  <div *ngIf="suppliers" class="container mt-4" style="margin-top: -75px !important;">
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="input-group">
+              <input
+                type="text"
+                (keyup.enter)="search()"
+                [(ngModel)]="query"
+                class="form-control"
+                placeholder="Search suppliers..."
+              />
+              <div class="input-group-append">
+                <button 
+                  (click)="search()" 
+                  class="btn btn-success" 
+                  type="button"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let supplier of suppliers.results" class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <h1 class="display-4" style="font-size: 25px;">{{ supplier.name }}</h1>
+                  <p class="lead text-break" style="font-size: 15px;">{{ supplier.address }}</p>
+                </div>
+                <div class="col">
+                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
+                    <div role="group" class="btn-group">
+                      <button (click)="delete(supplier)" class="btn btn-outline-success" type="button">
+                        Remove
+                      </button>
+                      <button (click)="update(supplier)" class="btn btn-success" type="button">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li
+              *ngIf="suppliers.next" 
+              (click)="paginate(suppliers.next)"
+              style="cursor: pointer;" 
+              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
+            >
+              <span class="text-muted">More</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navigation>
+
+<!-- <app-navigation></app-navigation>
 
 <div class="container" style="margin-top: 37px;">
   <h4 class="display-4 text-center" style="margin-top: 6px;font-size: 40px;">
@@ -10,8 +82,8 @@
   <p class="lead text-center" style="font-size: 18px;">
     Manage your supplier for better purchasing<br />
   </p>
-</div>
-
+</div> -->
+<!-- 
 <div class="container d-md-flex justify-content-center align-items-center align-content-center align-items-md-center">
   <div role="group" class="btn-group">
     <button [routerLink]="['/dashboard']" class="btn btn-secondary" type="button">Back</button>
@@ -25,8 +97,8 @@
       <img src="assets/no-data.png" />
     </div>
   </div>
-</div>
-
+</div> -->
+<!-- 
 <div *ngIf="!isEmpty" class="container" style="margin-top: 48px;">
   <div class="row">
       <div class="col-12">
@@ -65,7 +137,7 @@
               style="cursor: pointer;"
             >
               <span class="text-center">More</span>
-            </li>
+            </li> -->
             <!-- <button (click)="update(supplier)" class="list-group-item list-group-item-action" *ngFor="let supplier of suppliers.results">
               <h1 style="font-size: 18px;">{{ supplier.name }}</h1>
               <p class="lead" style="font-size: 14px;">
@@ -81,8 +153,8 @@
                 More
               </span>
             </button> -->
-          </ul> 
+          <!-- </ul> 
         </div>
       </div>
   </div>
-</div>
+</div> -->

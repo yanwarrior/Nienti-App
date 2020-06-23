@@ -19,6 +19,28 @@ import { SupplierDeleteComponent } from './popups/supplier-delete/supplier-delet
 import { ProductsComponent } from './components/products/products.component';
 import { ProductCreateComponent } from './popups/product-create/product-create.component';
 import { ProductEditComponent } from './popups/product-edit/product-edit.component';
+import { ProductDeleteComponent } from './popups/product-delete/product-delete.component';
+// PrimeNg
+import { ChipsModule } from 'primeng/chips';
+import { MenubarModule } from 'primeng/menubar';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { TreeModule } from 'primeng/tree';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { SlideMenuModule } from 'primeng/slidemenu';
+import {MenuModule} from 'primeng/menu';
+import { PanelModule } from 'primeng/panel';
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import { SubnavComponent } from './components/subnav/subnav.component';
+import { ListingComponent } from './components/listing/listing.component';
+import { EmptyComponent } from './components/empty/empty.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { CustomerEditComponent } from './popups/customer-edit/customer-edit.component';
+import { CustomerCreateComponent } from './popups/customer-create/customer-create.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +55,13 @@ import { ProductEditComponent } from './popups/product-edit/product-edit.compone
     ProductsComponent,
     ProductCreateComponent,
     ProductEditComponent,
+    ProductDeleteComponent,
+    SubnavComponent,
+    ListingComponent,
+    EmptyComponent,
+    CustomersComponent,
+    CustomerEditComponent,
+    CustomerCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +91,20 @@ import { ProductEditComponent } from './popups/product-edit/product-edit.compone
     BrowserAnimationsModule,
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    ChipsModule,
+    MenubarModule,
+    MegaMenuModule,
+    SplitButtonModule,
+    TreeModule,
+    PanelMenuModule,
+    TieredMenuModule,
+    SlideMenuModule,
+    MenuModule,
+    PanelModule,
+    TableModule,
+    InputTextModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

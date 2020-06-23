@@ -1,11 +1,48 @@
-<nav class="navbar navbar-dark navbar-expand-md bg-success shadow">
-  <div class="container"><a class="navbar-brand" href="#">Nienti</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse"
-          id="navcol-1">
-          <ul class="nav navbar-nav">
-              <li role="presentation" class="nav-item"></li>
-              <li role="presentation" class="nav-item"></li>
-              <li role="presentation" class="nav-item"></li>
-          </ul><button class="btn btn-outline-light btn-sm ml-auto" type="button">My Account</button></div>
-  </div>
+<div class="d-md-block d-lg-block d-xl-block mb-4">
+  <nav 
+    class="navbar navbar-dark navbar-expand-md sticky-top bg-success border-success border rounded-0 shadow-lg"
+  >
+    <div 
+      class="container-fluid"
+    >
+      <a 
+        class="navbar-brand"
+        href="#"
+      >
+        Nienti
+      </a>
+      <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div 
+        class="collapse navbar-collapse"
+        id="navcol-1"
+      >
+        <ul class="nav navbar-nav">
+          <li role="presentation" class="nav-item">
+            <a [routerLink]="['/suppliers']" class="nav-link active">Suppliers</a>
+          </li>
+          <li role="presentation" class="nav-item">
+            <a [routerLink]="['/customers']" class="nav-link active" href="#">Customers</a>
+          </li>
+          <li role="presentation" class="nav-item">
+            <a [routerLink]="['/products']" class="nav-link active" href="#">Products</a>
+          </li>
+          <li role="presentation" class="nav-item">
+            <a class="nav-link active" href="#">Sales</a>
+          </li>
+          <li role="presentation" class="nav-item">
+            <a class="nav-link active" href="#">Purchasing</a>
+          </li>
+          <li role="presentation" class="nav-item">
+            <a class="nav-link active" href="#">Reports</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 </nav>
+  <ng-content select="[subnav]"></ng-content>
+  <ng-content></ng-content>
+</div>
+

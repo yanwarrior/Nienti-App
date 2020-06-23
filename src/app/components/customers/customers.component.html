@@ -1,0 +1,74 @@
+<app-navigation>
+  <app-subnav subnav>
+    <h1>Customers</h1>
+    <p>Manage your customers to make Nienti work better for you</p>
+    <button class="btn btn-light">
+      New Customer
+    </button>
+  </app-subnav>
+
+  <app-empty *ngIf="!customers"></app-empty>
+
+  <div *ngIf="customers" class="container mt-4" style="margin-top: -75px !important;">
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="input-group">
+              <input
+                (keyup.enter)="search()"
+                [(ngModel)]="query"
+                type="text"
+                class="form-control"
+                placeholder="Search products..."
+              />
+              <div class="input-group-append">
+                <button
+                  (click)="search()"
+                  class="btn btn-success"
+                  type="button"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let customer of customers.results" class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <h1 class="display-4" style="font-size: 25px;">{{ customer.name }}</h1>
+                  <p class="lead text-break" style="font-size: 15px;margin-bottom: 5px;">{{ customer.phone }}</p>
+                  <p class="lead text-break" style="font-size: 15px;">{{ customer.address }}</p>
+                </div>
+                <div class="col">
+                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
+                    <div 
+                      role="group" 
+                      class="btn-group"
+                    >
+                      <button class="btn btn-outline-success" type="button">
+                        Remove
+                      </button>
+                      <button (click)="update(customer)" class="btn btn-success" type="button">
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li 
+              *ngIf="customers.next"
+              (click)="paginate(customers.next)"
+              style="cursor: pointer;"
+              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
+            >
+              <span class="text-muted">More</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navigation>

@@ -5,7 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SupplierComponent } from './components/supplier/supplier.component';
 import { ProductsComponent } from './components/products/products.component';
-
+import { CustomersComponent } from './components/customers/customers.component';
 
 const routes: Routes = [
   {
@@ -25,6 +25,11 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'customers',
+    component: CustomersComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
