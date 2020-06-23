@@ -1,74 +1,75 @@
-<app-navigation></app-navigation>
-
-<div class="container" style="margin-top: 37px;">
-  <h4 class="display-4 text-center" style="margin-top: 6px;font-size: 40px;">Products</h4>
-</div>
-
-<div class="container mb-4" style="margin-bottom: 35px;">
-  <p class="lead text-center" style="font-size: 18px;">
-    Manage your product for better purchasing and sale<br />
-  </p>
-</div>
-
-<div class="container text-light d-md-flex justify-content-center align-items-center align-content-center align-items-md-center">
-  <div role="group" class="btn-group">
-    <button [routerLink]="['/dashboard']" class="btn btn-secondary" type="button">Back</button>
-    <button (click)="create()" class="btn btn-success" type="button">New Product</button>
-  </div>
-</div>
-
-<div *ngIf="isEmpty" class="container" style="margin-top: 48px;">
-  <div class="row justify-content-center">
-    <div class="col-5 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-      <img src="assets/no-data.png" />
-    </div>
-  </div>
-</div>
-
-<div *ngIf="!isEmpty" class="container" style="margin-top: 48px;">
-  <div class="row">
-    <div class="col-12">
-        <div class="card shadow mb-4">
-            <div class="card-body" style="padding-top: 0px;">
-              <input
-                type="search"
-                class="bg-light form-control mt-4"
-                placeholder="Search products"
-                style="margin-top: 3px;"
-                [(ngModel)]="query"
+<app-navigation>
+  <app-subnav subnav>
+    <h1>Products</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laborum doloribus cum facere quasi, beatae cupiditate veritatis suscipit voluptatibus praesentium ipsum corrupti tempora in.
+    </p>
+    <button (click)="create()" class="btn btn-light">
+      New Product
+    </button>
+  </app-subnav>
+  <app-empty *ngIf="!products"></app-empty>
+  <div *ngIf="products" class="container mt-4" style="margin-top: -75px !important;">
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="input-group">
+              <input 
+                type="text"
                 (keyup.enter)="search()"
+                [(ngModel)]="query"
+                class="form-control"
+                placeholder="Search products..." 
               />
+              <div class="input-group-append">
+                <button
+                  (click)="search()" 
+                  class="btn btn-success"
+                  type="button"
+                >
+                  Search
+                </button>
+              </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li *ngFor="let product of products.results" class="list-group-item">
-                <div class="row">
-                    <div class="col">
-                      <h1 style="font-size: 18px;">
-                        {{ product.name }}
-                        <span class="badge badge-pill badge-light text-success shadow-sm mx-2" style="font-size: 14px;">
-                          {{ product.stock }} {{ product.unit }}
-                        </span>
-                      </h1>
-                      <p class="lead" style="font-size: 14px;">{{ product.price | currency:'Rp. ':'symbol':'3.0' }}</p>
-                    </div>
-                    <div class="col text-right d-lg-flex justify-content-lg-end align-items-lg-center">
-                      <div role="group" class="btn-group">
-                        <button class="btn btn-outline-light text-dark" type="button">Delete</button>
-                        <button (click)="update(product)" class="btn btn-success" type="button">Edit</button>
-                      </div>
-                    </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let product of products.results" class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <h1 class="display-4" style="font-size: 25px;">
+                    {{ product.name }}
+                  </h1>
+                  <p class="lead text-break" style="font-size: 15px;">
+                    {{ product.price | currency:'Rp. ':'symbol':'3.0' }} 
+                    / {{ product.unit | titlecase  }} with stock {{ product.stock }} {{ product.unit | titlecase }}
+                  </p>
                 </div>
-              </li>
-              <li
-                *ngIf="products.next"
-                (click)="paginate(products.next)"
-                style="cursor: pointer;"
-                class="list-group-item d-md-flex justify-content-md-center"
-              >
-                <span class="text-center">More</span>
-              </li>
-            </ul>
+                <div class="col">
+                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
+                      <div role="group" class="btn-group">
+                        <button (click)="delete(product)" class="btn btn-outline-success" type="button">
+                          Remove
+                        </button>
+                        <button (click)="update(product)" class="btn btn-success" type="button">
+                          Edit
+                        </button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li
+              *ngIf="products.next" 
+              (click)="paginate(products.next)"
+              style="cursor: pointer;" 
+              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
+            >
+              <span class="text-muted">More</span>
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
-  </div>
 </div>
+</app-navigation>

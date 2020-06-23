@@ -4,6 +4,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
 import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.component';
+import { ProductDeleteComponent } from 'src/app/popups/product-delete/product-delete.component';
+import { MenuItem } from 'primeng/api/menuitem';
+import { LazyLoadEvent } from 'primeng/api/public_api';
 
 @Component({
   selector: 'app-products',
@@ -12,9 +15,7 @@ import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.c
 })
 export class ProductsComponent implements OnInit {
   public products: ProductPaginationInterface;
-  public isEmpty: boolean = true;
   public query: string = '';
-  public cursor: string;
 
   constructor(
     private productService: ProductService,
@@ -29,10 +30,6 @@ export class ProductsComponent implements OnInit {
     this.productService.all().subscribe(
       (response) => {
         this.products = response;
-        if (response.results.length > 0) {
-          this.isEmpty = false;
-          this.cursor = response.next;
-        }
       },
       (error) => {
         console.log(error);
@@ -45,10 +42,6 @@ export class ProductsComponent implements OnInit {
     this.productService.search(this.query).subscribe(
       (response) => {
         this.products = response;
-        if (response.results.length > 0) {
-          this.isEmpty = false;
-          this.cursor = response.next;
-        }
       },  
       (error) => {
         console.log(error);
@@ -62,9 +55,6 @@ export class ProductsComponent implements OnInit {
       (response) => {
         this.products.results.push(...response.results);
         this.products.next = response.next;
-        if (response.results.length > 0) {
-          this.isEmpty = false;
-        }
       },
       (error) => {
         console.log(error);
@@ -91,4 +81,14 @@ export class ProductsComponent implements OnInit {
     modalRef.componentInstance.product = product;
   }
 
+  public delete(product: ProductInterface) {
+    const modalRef = this.modalService.open(ProductDeleteComponent);
+    modalRef.componentInstance.product = product;
+
+    modalRef.result.then(
+      (close: boolean) => {
+        this.all();
+      }
+    )
+  }
 }
