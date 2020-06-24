@@ -40,6 +40,7 @@ import { EmptyComponent } from './components/empty/empty.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { CustomerEditComponent } from './popups/customer-edit/customer-edit.component';
 import { CustomerCreateComponent } from './popups/customer-create/customer-create.component';
+import { CustomerDeleteComponent } from './popups/customer-delete/customer-delete.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { CustomerCreateComponent } from './popups/customer-create/customer-creat
     CustomersComponent,
     CustomerEditComponent,
     CustomerCreateComponent,
+    CustomerDeleteComponent,
   ],
   imports: [
     BrowserModule,

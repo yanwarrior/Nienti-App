@@ -1,1 +1,45 @@
-<p>customer-create works!</p>
+<div role="dialog" tabindex="-1" class="modal d-block">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
+        <h4>New Customer</h4>
+        <p>Fill in complete data for better results</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Customer Name</label>
+          <input [(ngModel)]="customer.name" type="text" class="form-control" placeholder="Input name" />
+        </div>
+        <div class="form-group">
+          <label>Customer Phone</label>
+          <input [(ngModel)]="customer.phone" type="text" class="form-control" placeholder="Input phone" />
+        </div>
+        <div class="form-group">
+          <label>Customer Email</label>
+          <input [(ngModel)]="customer.email" type="text" class="form-control" placeholder="Input email" />
+        </div>
+        <div class="form-group">
+          <label>Customer Address</label>
+          <textarea [(ngModel)]="customer.address" class="form-control" placeholder="Input address"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button 
+          (click)="activeModal.dismiss(false)"
+          class="btn btn-light" 
+          type="button" 
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <button 
+          (click)="create()"
+          class="btn btn-success" 
+          type="button"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

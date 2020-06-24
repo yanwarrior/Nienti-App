@@ -3,6 +3,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerPaginationInterface, CustomerInterface } from 'src/app/interfaces/customers';
 import { CustomerEditComponent } from 'src/app/popups/customer-edit/customer-edit.component';
+import { CustomerCreateComponent } from 'src/app/popups/customer-create/customer-create.component';
+import { CustomerDeleteComponent } from 'src/app/popups/customer-delete/customer-delete.component';
 
 @Component({
   selector: 'app-customers',
@@ -59,8 +61,30 @@ export class CustomersComponent implements OnInit {
     );
   }
 
+  public create() {
+    this.modalService.open(CustomerCreateComponent).result.then(
+      (result) => {
+        this.all();
+      },
+      (dismiss) => {
+        console.log(dismiss);
+      }
+    )
+  }
+
   public update(customer: CustomerInterface) {
     const modalRef = this.modalService.open(CustomerEditComponent);
     modalRef.componentInstance.customer = customer;
+  }
+
+  public delete(customer: CustomerInterface) {
+    const modalRef = this.modalService.open(CustomerDeleteComponent);
+    modalRef.componentInstance.customer = customer;
+
+    modalRef.result.then(
+      (close) => {
+        this.all();
+      }
+    );
   }
 }

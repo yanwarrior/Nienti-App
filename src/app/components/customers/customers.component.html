@@ -2,7 +2,10 @@
   <app-subnav subnav>
     <h1>Customers</h1>
     <p>Manage your customers to make Nienti work better for you</p>
-    <button class="btn btn-light">
+    <button
+      (click)="create()"
+      class="btn btn-light"
+    >
       New Customer
     </button>
   </app-subnav>
@@ -47,7 +50,7 @@
                       role="group" 
                       class="btn-group"
                     >
-                      <button class="btn btn-outline-success" type="button">
+                      <button (click)="delete(customer)" class="btn btn-outline-success" type="button">
                         Remove
                       </button>
                       <button (click)="update(customer)" class="btn btn-success" type="button">

@@ -1,21 +1,20 @@
-<div role="dialog" tabindex="-1" class="modal d-block" style="display: block;">
-  <div class="modal-dialog" role="document">
+<div role="dialog" tabindex="-1" class="modal d-block">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="display-4 modal-title text-danger" style="font-size: 24px;">
-            Delete {{ supplier.name }}
-          </h4>
-          <button (click)="activeModal.dismiss('Cross click')" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body d-lg-flex justify-content-lg-center align-items-lg-center">
-          <img class="d-lg-flex" src="assets/confirm-delete.png" />
-        </div>
-        <div class="modal-footer">
-          <button (click)="delete()" class="btn btn-outline-danger" type="button" data-dismiss="modal">Confirm</button>
-          <button (click)="activeModal.close(false)" class="btn btn-success" type="button">Cancel</button>
-        </div>
+      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
+        <h4>{{ supplier.name }}</h4>
+        <p>{{ supplier.phone }}</p>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger">
+          Are you sure you want to delete? 
+          Deleted data cannot be restored anymore.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="delete()" class="btn btn-light" type="button" data-dismiss="modal">Yes, Sure!</button>
+        <button (click)="activeModal.close(false)" class="btn btn-success" type="button">No</button>
+      </div>
     </div>
   </div>
 </div>

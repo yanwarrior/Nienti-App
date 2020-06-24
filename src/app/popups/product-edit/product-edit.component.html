@@ -1,19 +1,9 @@
-<div role="dialog" tabindex="-1" class="modal d-block" style="display: block;">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+<div role="dialog" tabindex="-1" class="modal d-block">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="display-4 modal-title" style="font-size: 24px;">
-          {{ product.name }}
-        </h4>
-        <button
-          (click)="activeModal.dismiss(false)" 
-          type="button" 
-          class="close" 
-          data-dismiss="modal" 
-          aria-label="Close"
-        >
-          <span aria-hidden="true">×</span>
-        </button>
+      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.price | currency:'Rp. ':'symbol':'3.0'  }}/{{ product.unit }}</p>
       </div>
       <div class="modal-body">
         <div class="form-group">
@@ -43,21 +33,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button 
-          (click)="activeModal.dismiss(false)"
-          class="btn btn-light" 
-          type="button" 
-          data-dismiss="modal"
-        >
-          Close
-        </button>
-        <button
-          (click)="update()"
-          class="btn btn-success" 
-          type="button"
-        >
-          Save
-        </button>
+        <button (click)="activeModal.close(false)" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+        <button (click)="update()" class="btn btn-success" type="button">Save</button>
       </div>
     </div>
   </div>
