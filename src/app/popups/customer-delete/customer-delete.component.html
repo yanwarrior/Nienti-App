@@ -1,13 +1,12 @@
 <div role="dialog" tabindex="-1" class="modal d-block">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
-        <h4>{{ customer.name }}</h4>
-        <p>{{ customer.phone }}</p>
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Customer</h5>
       </div>
       <div class="modal-body">
         <p class="text-danger">
-          Are you sure you want to delete? 
+          Are you sure you want to delete <strong>{{ customer.name }}</strong>.
           Deleted data cannot be restored anymore.
         </p>
       </div>
