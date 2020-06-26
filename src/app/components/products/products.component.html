@@ -1,75 +1,53 @@
 <app-navigation>
-  <app-subnav subnav>
-    <h1>Products</h1>
-    <p>
-      Manage your products to make Nienti work better for you
-    </p>
-    <button (click)="create()" class="btn btn-light">
-      New Product
+  <app-subnav>
+    <span title>Products</span>
+    <input 
+      (keyup.enter)="search()" [(ngModel)]="query" 
+      search class="form-control mr-sm-2" type="search" 
+      placeholder="search" aria-label="Search" 
+    />
+    <button 
+      (click)="create()" actions
+      class="btn btn-success my-2 my-sm-0"
+    >
+      Create
     </button>
   </app-subnav>
-  <app-empty *ngIf="!products"></app-empty>
-  <div *ngIf="products" class="container mt-4" style="margin-top: -75px !important;">
-    <div class="row">
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-body">
-            <div class="input-group">
-              <input 
-                type="text"
-                (keyup.enter)="search()"
-                [(ngModel)]="query"
-                class="form-control"
-                placeholder="Search products..." 
-              />
-              <div class="input-group-append">
-                <button
-                  (click)="search()" 
-                  class="btn btn-success"
-                  type="button"
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let product of products.results" class="list-group-item">
-              <div class="row">
-                <div class="col">
-                  <h1 class="display-4" style="font-size: 25px;">
-                    {{ product.name }}
-                  </h1>
-                  <p class="lead text-break" style="font-size: 15px;">
-                    {{ product.price | currency:'Rp. ':'symbol':'3.0' }} 
-                    / {{ product.unit | titlecase  }} with stock {{ product.stock }} {{ product.unit | titlecase }}
-                  </p>
-                </div>
-                <div class="col">
-                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
-                      <div role="group" class="btn-group">
-                        <button (click)="delete(product)" class="btn btn-outline-success" type="button">
-                          Remove
-                        </button>
-                        <button (click)="update(product)" class="btn btn-success" type="button">
-                          Edit
-                        </button>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li
-              *ngIf="products.next" 
-              (click)="paginate(products.next)"
-              style="cursor: pointer;" 
-              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
-            >
-              <span class="text-muted">More</span>
-            </li>
-          </ul>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <app-empty *ngIf="!products || products.results.length == 0"></app-empty>
+      <div *ngIf="products && products.results.length > 0" class="card shadow">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products.results">
+                <td>{{ product.name }}</td>
+                <td>{{ product.unit }}</td>
+                <td>{{ product.price | currency:'Rp. ':'symbol':'3.0'  }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                  <button (click)="delete(product)" class="btn btn-light btn-sm">Delete</button>
+                  <button (click)="update(product)" class="btn btn-outline-success btn-sm ml-2">Edit</button>
+                </td>
+              </tr>
+              <tr *ngIf="products.next" class="bg-light">
+                <td (click)="paginate(products.next)" style="cursor: pointer;" class="text-center text-success" colspan="5">
+                  More
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-</div>
+  </div>
 </app-navigation>

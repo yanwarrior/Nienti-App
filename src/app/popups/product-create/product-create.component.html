@@ -1,20 +1,19 @@
 <div role="dialog" tabindex="-1" class="modal d-block">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
-        <h4>New Supplier</h4>
-        <p>Fill in complete data for better results</p>
+      <div class="modal-header">
+        <h5 class="modal-title">Create Product</h5>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <label>Product Name *</label>
-          <input [(ngModel)]="product.name" type="text" class="bg-light form-control" />
+          <input [(ngModel)]="product.name" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>Product Unit *</label>
           <select 
             [(ngModel)]="product.unit"
-            class="bg-light custom-select form-control"
+            class="custom-select form-control"
             required
           >
             <option value="pcs" selected>Pieces</option>
@@ -25,11 +24,11 @@
         </div>
         <div class="form-group">
           <label>Product Price *</label>
-          <input [(ngModel)]="product.price" type="number" class="bg-light form-control" required />
+          <input [(ngModel)]="product.price" type="number" class="form-control" required />
         </div>
         <div class="form-group">
           <label>Product Stock *</label>
-          <input [(ngModel)]="product.stock" type="number" class="bg-light form-control" />
+          <input [(ngModel)]="product.stock" type="number" class="form-control" />
         </div>
       </div>
       <div class="modal-footer">
