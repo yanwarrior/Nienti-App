@@ -1,26 +1,25 @@
 <div role="dialog" tabindex="-1" class="modal d-block">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
-        <h4>New Customer</h4>
-        <p>Fill in complete data for better results</p>
+      <div class="modal-header">
+        <h5 class="modal-title">Create Customer</h5>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <label>Customer Name</label>
-          <input [(ngModel)]="customer.name" type="text" class="form-control" placeholder="Input name" />
+          <input [(ngModel)]="customer.name" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>Customer Phone</label>
-          <input [(ngModel)]="customer.phone" type="text" class="form-control" placeholder="Input phone" />
+          <input [(ngModel)]="customer.phone" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>Customer Email</label>
-          <input [(ngModel)]="customer.email" type="text" class="form-control" placeholder="Input email" />
+          <input [(ngModel)]="customer.email" type="text" class="form-control" />
         </div>
         <div class="form-group">
           <label>Customer Address</label>
-          <textarea [(ngModel)]="customer.address" class="form-control" placeholder="Input address"></textarea>
+          <textarea [(ngModel)]="customer.address" class="form-control" ></textarea>
         </div>
       </div>
       <div class="modal-footer">

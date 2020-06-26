@@ -14,6 +14,8 @@ export interface CustomerPaginationInterface {
 }
 
 
+
+
 export class CustomerSerializer implements CustomerInterface {
   public id: number;
   public name: string;

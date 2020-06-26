@@ -29,10 +29,8 @@ export class SupplierComponent implements OnInit {
   public all() {
     this.supplierService.all().subscribe(
       (response) => {
-        this.suppliers = response;
         if (response.results.length > 0) {
-          this.isEmpty = false;
-          this.cursor = response.next;
+          this.suppliers = response;
         }
       },
       (error) => {

@@ -1,75 +1,42 @@
 <app-navigation>
-  <app-subnav subnav>
-    <h1>Customers</h1>
-    <p>Manage your customers to make Nienti work better for you</p>
-    <button
-      (click)="create()"
-      class="btn btn-light"
-    >
-      New Customer
-    </button>
+  <app-subnav>
+    <span title>Customers</span>
+    <input (keyup.enter)="search()" [(ngModel)]="query" search class="form-control mr-sm-2" type="search" placeholder="search" aria-label="Search" />
+    <button (click)="create()" actions class="btn btn-success my-2 my-sm-0">Create</button>
   </app-subnav>
-
-  <app-empty *ngIf="!customers"></app-empty>
-
-  <div *ngIf="customers" class="container mt-4" style="margin-top: -75px !important;">
-    <div class="row">
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-body">
-            <div class="input-group">
-              <input
-                (keyup.enter)="search()"
-                [(ngModel)]="query"
-                type="text"
-                class="form-control"
-                placeholder="Search products..."
-              />
-              <div class="input-group-append">
-                <button
-                  (click)="search()"
-                  class="btn btn-success"
-                  type="button"
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let customer of customers.results" class="list-group-item">
-              <div class="row">
-                <div class="col">
-                  <h1 class="display-4" style="font-size: 25px;">{{ customer.name }}</h1>
-                  <p class="lead text-break" style="font-size: 15px;margin-bottom: 5px;">{{ customer.phone }}</p>
-                  <p class="lead text-break" style="font-size: 15px;">{{ customer.address }}</p>
-                </div>
-                <div class="col">
-                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
-                    <div 
-                      role="group" 
-                      class="btn-group"
-                    >
-                      <button (click)="delete(customer)" class="btn btn-outline-success" type="button">
-                        Remove
-                      </button>
-                      <button (click)="update(customer)" class="btn btn-success" type="button">
-                        Edit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li 
-              *ngIf="customers.next"
-              (click)="paginate(customers.next)"
-              style="cursor: pointer;"
-              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
-            >
-              <span class="text-muted">More</span>
-            </li>
-          </ul>
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <app-empty *ngIf="!customers || customers.results.length == 0"></app-empty>
+      <div *ngIf="customers && customers.results.length > 0" class="card shadow">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers.results">
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td class="text-truncate">{{ customer.address }}</td>
+                <td>
+                  <button (click)="delete(customer)" class="btn btn-light btn-sm">Delete</button>
+                  <button (click)="update(customer)" class="btn btn-outline-success btn-sm ml-2">Edit</button>
+                </td>
+              </tr>
+              <tr *ngIf="customers.next" class="bg-light">
+                <td (click)="paginate(customers.next)" style="cursor: pointer;" class="text-center text-success" colspan="5">
+                  More
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
