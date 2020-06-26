@@ -11,7 +11,7 @@ import { UserInterface } from '../interfaces/users';
 })
 export class AuthService {
 
-  basePath = 'http://192.168.43.60:8000';
+  basePath = 'http://localhost:8000';
 
   constructor(
     private router: Router,

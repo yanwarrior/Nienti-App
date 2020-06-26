@@ -6,7 +6,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-  public baseUrl: string = 'http://192.168.43.60:8000';
+  public baseUrl: string = 'http://localhost:8000';
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'

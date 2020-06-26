@@ -20,20 +20,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductCreateComponent } from './popups/product-create/product-create.component';
 import { ProductEditComponent } from './popups/product-edit/product-edit.component';
 import { ProductDeleteComponent } from './popups/product-delete/product-delete.component';
-// PrimeNg
-import { ChipsModule } from 'primeng/chips';
-import { MenubarModule } from 'primeng/menubar';
-import { MegaMenuModule } from 'primeng/megamenu';
-import { SplitButtonModule } from 'primeng/splitbutton';
-import { TreeModule } from 'primeng/tree';
-import { PanelMenuModule } from 'primeng/panelmenu';
-import { TieredMenuModule } from 'primeng/tieredmenu';
-import { SlideMenuModule } from 'primeng/slidemenu';
-import {MenuModule} from 'primeng/menu';
-import { PanelModule } from 'primeng/panel';
-import {TableModule} from 'primeng/table';
-import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
+
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { EmptyComponent } from './components/empty/empty.component';
@@ -77,16 +64,10 @@ import { CustomerDeleteComponent } from './popups/customer-delete/customer-delet
         },
         whitelistedDomains: [
           'localhost:8000',
-          '0.0.0.0:8000',
-          '192.168.43.60:8000',
         ],
         blacklistedRoutes: [
           'http://localhost:8000/login/',
           'http://localhost:8000/refresh/',
-          'http://0.0.0.0:8000/login/',
-          'http://0.0.0.0:8000/refresh/',
-          'http://192.168.43.60:8000/login/',
-          'http://192.168.43.60:8000/refresh/',
         ]
       }
     }),
@@ -94,19 +75,6 @@ import { CustomerDeleteComponent } from './popups/customer-delete/customer-delet
     NgbModule,
     NgbPaginationModule,
     NgbAlertModule,
-    ChipsModule,
-    MenubarModule,
-    MegaMenuModule,
-    SplitButtonModule,
-    TreeModule,
-    PanelMenuModule,
-    TieredMenuModule,
-    SlideMenuModule,
-    MenuModule,
-    PanelModule,
-    TableModule,
-    InputTextModule,
-    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

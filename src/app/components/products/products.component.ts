@@ -5,8 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
 import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.component';
 import { ProductDeleteComponent } from 'src/app/popups/product-delete/product-delete.component';
-import { MenuItem } from 'primeng/api/menuitem';
-import { LazyLoadEvent } from 'primeng/api/public_api';
 
 @Component({
   selector: 'app-products',

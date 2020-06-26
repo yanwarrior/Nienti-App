@@ -1,22 +1,21 @@
 <div role="dialog" tabindex="-1" class="modal d-block">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
-      <div class="jumbotron text-light bg-success border rounded-0 border-success shadow-sm" style="padding-top: 11px;padding-bottom: 11px;margin-bottom: 4px;">
-        <h4>New Supplier</h4>
-        <p>Fill in complete data for better results</p>
+      <div class="modal-header">
+        <h5 class="modal-title">Create Supplier</h5>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label>Supplier Name</label>
-          <input [(ngModel)]="supplier.name" type="text" class="bg-light form-control" />
+          <label>Name</label>
+          <input [(ngModel)]="supplier.name" type="text" class="form-control" />
         </div>
         <div class="form-group">
-          <label>Supplier Phone</label>
-          <input [(ngModel)]="supplier.phone" type="tel" class="bg-light form-control" />
+          <label>Phone Number</label>
+          <input [(ngModel)]="supplier.phone" type="tel" class="form-control" />
         </div>
         <div class="form-group">
-          <label>Supplier Address</label>
-          <textarea [(ngModel)]="supplier.address" class="bg-light form-control"></textarea>
+          <label>Address</label>
+          <textarea [(ngModel)]="supplier.address" class="form-control"></textarea>
         </div>
       </div>
       <div class="modal-footer">

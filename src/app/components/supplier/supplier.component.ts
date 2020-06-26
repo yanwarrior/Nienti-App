@@ -57,7 +57,7 @@ export class SupplierComponent implements OnInit {
       }
     );
   }
-
+  
   public paginate(cursor: string) {
     this.supplierService.paginate(cursor).subscribe(
       (response) => {
