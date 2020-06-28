@@ -1,0 +1,55 @@
+<app-navigation>
+  <button actions class="btn btn-light my-2 ml-4 my-sm-0">Save</button>
+  <div content class="row">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Items</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-condensed">
+            <thead>
+              <tr class="bg-light">
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>
+                  <button (click)="browseProducts()" class="btn btn-sm btn-outline-dark float-right">
+                    <i-bs name="search"></i-bs>&nbsp;Products
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!carts">
+              <tr>
+                <td colspan="5">No data</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="carts && carts.results.length > 0">
+              <tr *ngFor="let cart of carts.results"> 
+                <td>{{ cart.name }} {{ cart.stock }}{{ cart.unit }}</td>
+                <td>{{ cart.price | currency }}</td>
+                <td>
+                  <input [(ngModel)]="cart.quantity" (change)="updateCart(cart)" type="number" class="form-control col-3" />
+                </td>
+                <td>{{ cart.subtotal | currency }}</td>
+                <td>
+                  <button class="btn btn-sm btn-light float-right">
+                    <i-bs name="trash-fill"></i-bs>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            
+            <tbody *ngIf="carts && carts.results.length == 0">
+              <tr>
+                <td colspan="5">Not found</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navigation>

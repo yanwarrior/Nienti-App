@@ -50,6 +50,6 @@ export interface CartInterface {
 export interface CartPaginationInterface {
   next: string;
   previous: string;
-  carts: CartInterface[];
+  results: CartInterface[];
 }
 

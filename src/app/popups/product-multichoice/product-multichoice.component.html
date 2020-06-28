@@ -1,16 +1,28 @@
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Choose Product</h5>
-        </div>
-        <div class="modal-body">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
+
+<div class="modal-header">
+  <h5 class="modal-title">Select products</h5>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input [(ngModel)]="query" (keyup.enter)="search()" type="search" class="form-control" placeholder="Search">
   </div>
+  <ul *ngIf="products && products.results.length == 0" class="list-group mt-2">
+    <li class="list-group-item">
+      Data is empty or not found
+    </li>
+  </ul>
+  <ul *ngIf="products && products.results.length > 0" class="list-group mt-2">
+    <li *ngFor="let product of products.results" class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="form-group form-check">
+        <input (change)="add($event, product)" type="checkbox" class="form-check-input">
+      </div>
+      {{ product.name }}
+      <span class="badge badge-light badge-pill">{{ product.stock }} in stock</span>
+      <span class="ml-2 badge badge-light badge-pill">{{ product.price | currency:'Rp. ':'symbol':'3.0' }}</span>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss(false)" type="button" class="btn btn-light">Close</button>
+  <button [disabled]="!productChecked" (click)="addToOrder()" type="button" class="btn btn-success">Add to order</button>
+</div>

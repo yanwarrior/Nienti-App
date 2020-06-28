@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { SupplierComponent } from './components/supplier/supplier.component';
@@ -29,7 +30,7 @@ import { CustomerEditComponent } from './popups/customer-edit/customer-edit.comp
 import { CustomerCreateComponent } from './popups/customer-create/customer-create.component';
 import { CustomerDeleteComponent } from './popups/customer-delete/customer-delete.component';
 import { ProductMultichoiceComponent } from './popups/product-multichoice/product-multichoice.component';
-import { CartsComponent } from './components/carts/carts.component';
+import { SaleCreateComponent } from './components/sale-create/sale-create.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { CartsComponent } from './components/carts/carts.component';
     CustomerCreateComponent,
     CustomerDeleteComponent,
     ProductMultichoiceComponent,
-    CartsComponent,
+    SaleCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +77,7 @@ import { CartsComponent } from './components/carts/carts.component';
     }),
     BrowserAnimationsModule,
     NgbModule,
+    NgxBootstrapIconsModule.pick(allIcons),
     NgbPaginationModule,
     NgbAlertModule,
   ],

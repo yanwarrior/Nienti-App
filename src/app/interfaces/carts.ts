@@ -1,3 +1,5 @@
+import { ProductInterface } from './products';
+
 export interface CartInterface {
   id: number;
   user: number;
@@ -7,9 +9,7 @@ export interface CartInterface {
   price: number;
   stock: number;
   quantity: number;
-
-  isValidStock(): boolean;
-  getSubtotal(): number;
+  subtotal: number;
 }
 
 export interface CartPaginationInterface {
@@ -29,16 +29,16 @@ export class CartSerializer implements CartInterface {
   quantity: number;
   subtotal: number;
 
-  public isValidStock() {
-    if (this.stock && this.stock == 0) {
-      return false;
-    }
+  public productToCart(product: ProductInterface): CartSerializer {
+    this.product = product.id;
+    this.name = product.name;
+    this.unit = product.unit;
+    this.price = product.price;
+    this.stock = product.stock;
+    this.quantity = 1;
+    this.subtotal = 1 * product.price;
 
-    if (this.stock && (this.stock - this.quantity) <= 0) {
-      return false;
-    }
-
-    return true;
+    return this;
   }
 }
 

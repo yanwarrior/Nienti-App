@@ -50,4 +50,14 @@ export class CartService {
         catchError(this.baseService.handleError)
       );
   }
+
+  clear(): Observable<any> {
+    const url: string = `${this.baseService.baseUrl}/carts/clear/`;
+    return this.httpClient.delete<any>(url, this.baseService.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.baseService.handleError)
+      );
+  }
+  
 }

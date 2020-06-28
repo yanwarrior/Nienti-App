@@ -24,8 +24,28 @@ export class ProductService {
       );
   }
 
+  choices(): Observable<ProductPaginationInterface> {
+    const url: string = `${this.baseService.baseUrl}/products/choices/`;
+    return this.httpClient.get<ProductPaginationInterface>(url, this.baseService.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.baseService.handleError)
+      );
+  }
+
   search(search: string): Observable<ProductPaginationInterface> {
     const url: string = `${this.baseService.baseUrl}/products/`;
+    this.baseService.httpOptions['params'] = new HttpParams().set('search', search);
+
+    return this.httpClient.get<ProductPaginationInterface>(url, this.baseService.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.baseService.handleError)
+      );
+  }
+
+  searchChoices(search: string): Observable<ProductPaginationInterface> {
+    const url: string = `${this.baseService.baseUrl}/products/choices/`;
     this.baseService.httpOptions['params'] = new HttpParams().set('search', search);
 
     return this.httpClient.get<ProductPaginationInterface>(url, this.baseService.httpOptions)

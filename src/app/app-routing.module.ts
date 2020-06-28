@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { SupplierComponent } from './components/supplier/supplier.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CustomersComponent } from './components/customers/customers.component';
-import { CartsComponent } from './components/carts/carts.component';
+import { SaleCreateComponent } from './components/sale-create/sale-create.component';
 
 const routes: Routes = [
   {
@@ -38,9 +38,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'carts',
-    component: CartsComponent,
-    canActivate: [AuthGuard]
+    path: 'sale-create',
+    component: SaleCreateComponent,
+    canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
