@@ -28,7 +28,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { CustomerEditComponent } from './popups/customer-edit/customer-edit.component';
 import { CustomerCreateComponent } from './popups/customer-create/customer-create.component';
 import { CustomerDeleteComponent } from './popups/customer-delete/customer-delete.component';
-
+import { ProductMultichoiceComponent } from './popups/product-multichoice/product-multichoice.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { CustomerDeleteComponent } from './popups/customer-delete/customer-delet
     CustomerEditComponent,
     CustomerCreateComponent,
     CustomerDeleteComponent,
+    ProductMultichoiceComponent,
   ],
   imports: [
     BrowserModule,

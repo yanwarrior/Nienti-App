@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
 import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.component';
 import { ProductDeleteComponent } from 'src/app/popups/product-delete/product-delete.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',

@@ -14,6 +14,10 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'admin',
+    loadChildren: './stocks/stocks.module#StocksModule',
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
