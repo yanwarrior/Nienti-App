@@ -7,6 +7,9 @@ export interface CartInterface {
   price: number;
   stock: number;
   quantity: number;
+
+  isValidStock(): boolean;
+  getSubtotal(): number;
 }
 
 export interface CartPaginationInterface {
@@ -24,5 +27,18 @@ export class CartSerializer implements CartInterface {
   price: number;
   stock: number;
   quantity: number;
+  subtotal: number;
+
+  public isValidStock() {
+    if (this.stock && this.stock == 0) {
+      return false;
+    }
+
+    if (this.stock && (this.stock - this.quantity) <= 0) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
