@@ -11,6 +11,7 @@ import { CustomerChoiceComponent } from 'src/app/popups/customer-choice/customer
 import { CustomerInterface } from 'src/app/interfaces/customers';
 import { FormControl } from '@angular/forms';
 import { SaleInterface, SaleSerializer } from 'src/app/interfaces/sales';
+import { SaleService } from 'src/app/services/sale.service';
 
 @Component({
   selector: 'app-sale-create',
@@ -26,6 +27,7 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
 
   constructor(
     private modalService: NgbModal,
+    private saleService: SaleService,
     private cartService: CartService,
     public calendarService: NgbCalendar
   ) { }
@@ -176,7 +178,19 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
       day: this.date.day.toString()
     }
     this.sale.setSaleDateFromJSON(date);
-    console.log(JSON.stringify(this.sale));
+
+    const sub = this.saleService.create(this.sale).subscribe(
+      (response) => {
+        this.allCart();
+        this.sale.generateSaleNumber();
+        sub.unsubscribe();
+      },
+      (error) => {
+        console.log(error);
+        sub.unsubscribe();
+        alert(error);
+      }
+    )
   }
 
 }
