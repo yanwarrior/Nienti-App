@@ -42,3 +42,7 @@ export class CartSerializer implements CartInterface {
   }
 }
 
+export interface CartSummaryInterface {
+  summary: number;
+}
+

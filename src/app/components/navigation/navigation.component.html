@@ -60,7 +60,7 @@
           Sales & Purchasing
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="dropdown-menu">
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Sales Order</a>
+          <a ngbDropdownItem [routerLink]="['/sale-create']">Sales Order</a>
           <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Purchase</a>
         </div>
       </li>

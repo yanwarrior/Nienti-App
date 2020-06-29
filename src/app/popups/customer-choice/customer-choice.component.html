@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Select customer</h4>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <input type="search" class="form-control" placeholder="Search">
+  </div>
+  <ul *ngIf="!customers" class="list-group mt-2">
+    <li class="list-group-item">
+      Data is empty
+    </li>
+  </ul>
+  <ul *ngIf="customers && customers.results.length == 0" class="list-group mt-2">
+    <li class="list-group-item">
+      Data not found
+    </li>
+  </ul>
+  <ul *ngIf="customers && customers.results.length > 0" class="list-group mt-2">
+    <li *ngFor="let cst of customers.results" (click)="add(cst)" [class.bg-light]="cst == customer" class="list-group-item d-flex justify-content-between align-items-center">
+      {{ cst.name }}
+      <span class=" badge badge-light badge-pill">{{ cst.phone }}</span>
+    </li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss(false)" type="button" class="btn btn-light">Close</button>
+  <button [class.disabled]="!customer" (click)="done()" type="button" class="btn btn-success">Add customer</button>
+</div>

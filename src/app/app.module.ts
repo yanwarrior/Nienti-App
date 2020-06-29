@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -31,6 +31,7 @@ import { CustomerCreateComponent } from './popups/customer-create/customer-creat
 import { CustomerDeleteComponent } from './popups/customer-delete/customer-delete.component';
 import { ProductMultichoiceComponent } from './popups/product-multichoice/product-multichoice.component';
 import { SaleCreateComponent } from './components/sale-create/sale-create.component';
+import { CustomerChoiceComponent } from './popups/customer-choice/customer-choice.component';
 
 @NgModule({
   declarations: [
@@ -55,11 +56,13 @@ import { SaleCreateComponent } from './components/sale-create/sale-create.compon
     CustomerDeleteComponent,
     ProductMultichoiceComponent,
     SaleCreateComponent,
+    CustomerChoiceComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

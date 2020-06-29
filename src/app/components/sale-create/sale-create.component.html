@@ -1,7 +1,7 @@
 <app-navigation>
   <button actions class="btn btn-light my-2 ml-4 my-sm-0">Save</button>
   <div content class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Items</h4>
@@ -28,17 +28,23 @@
             </tbody>
             <tbody *ngIf="carts && carts.results.length > 0">
               <tr *ngFor="let cart of carts.results"> 
-                <td>{{ cart.name }} {{ cart.stock }}{{ cart.unit }}</td>
+                <td class="text-success text-sm-left">{{ cart.name }} {{ cart.stock }}{{ cart.unit }}</td>
                 <td>{{ cart.price | currency }}</td>
                 <td>
-                  <input [(ngModel)]="cart.quantity" (change)="updateCart(cart)" type="number" class="form-control col-3" />
+                  <input [(ngModel)]="cart.quantity" (keyup.enter)="updateCart(cart)" type="number" class="form-control form-control-sm col-3" />
+                  <small class="help text-muted">Press enter after fill</small>
                 </td>
                 <td>{{ cart.subtotal | currency }}</td>
                 <td>
-                  <button class="btn btn-sm btn-light float-right">
+                  <button (click)="deleteCart(cart)" class="btn btn-sm btn-light float-right">
                     <i-bs name="trash-fill"></i-bs>
                   </button>
                 </td>
+              </tr>
+              <tr *ngIf="cartSummary">
+                <td>Total</td>
+                <td colspan="3" class="text-right">{{ cartSummary.summary | currency }}</td>
+                <td></td>
               </tr>
             </tbody>
             
@@ -48,6 +54,40 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <h4 class="card-title">Payment</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div *ngIf="!customer" class="card">
+        <div class="card-body">
+          <h4 class="card-title">Customer</h4>
+          <button (click)="browseCustomer()" class="btn btn-outline-dark btn-sm">
+            <i-bs name="search"></i-bs>&nbsp;Customer
+          </button>
+        </div>
+      </div>
+      <div *ngIf="customer" class="card">
+        <div class="card-body">
+          <h4 class="card-title">Customer</h4>
+          <p class="card-text text-success">
+            {{ customer.name }}
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ customer.phone }}</li>
+          <li class="list-group-item">{{ customer.email }}</li>
+          <li class="list-group-item text-truncate">{{ customer.address }}</li>
+        </ul>
+        <div class="card-body">
+          <button (click)="browseCustomer()" class="btn btn-outline-dark btn-sm">
+            <i-bs name="search"></i-bs>&nbsp;Customer
+          </button>
         </div>
       </div>
     </div>

@@ -3,7 +3,9 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartInterface, CartPaginationInterface } from '../interfaces/sales';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, debounceTime } from 'rxjs/operators';
+import { CartSummaryInterface } from '../interfaces/carts';
+import { HandThumbsDown } from 'ngx-bootstrap-icons';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,7 @@ export class CartService {
     return this.httpClient.put<CartInterface>(url, cart, this.baseService.httpOptions)
       .pipe(
         retry(2),
+        debounceTime(1000),
         catchError(this.baseService.handleError)
       );
   }
@@ -54,6 +57,15 @@ export class CartService {
   clear(): Observable<any> {
     const url: string = `${this.baseService.baseUrl}/carts/clear/`;
     return this.httpClient.delete<any>(url, this.baseService.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.baseService.handleError)
+      );
+  }
+
+  summary(): Observable<CartSummaryInterface> {
+    const url: string = `${this.baseService.baseUrl}/carts/summary/`;
+    return this.httpClient.post<CartSummaryInterface>(url, {}, this.baseService.httpOptions)
       .pipe(
         retry(2),
         catchError(this.baseService.handleError)
