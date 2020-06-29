@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   public collapsed: boolean = true;
+
+  @Input() title: string = '';
 
   ngOnInit(): void {
   }

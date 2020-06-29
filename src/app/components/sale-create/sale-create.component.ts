@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { ProductInterface } from 'src/app/interfaces/products';
 import { ProductMultichoiceComponent } from 'src/app/popups/product-multichoice/product-multichoice.component';
 import { forkJoin } from 'rxjs';
-import { CartInterface, CartPaginationInterface } from 'src/app/interfaces/sales';
+import { CartInterface, CartPaginationInterface } from 'src/app/interfaces/carts';
 import { CartSerializer, CartSummaryInterface } from 'src/app/interfaces/carts';
 import { tap, debounceTime } from 'rxjs/operators';
 import { CustomerChoiceComponent } from 'src/app/popups/customer-choice/customer-choice.component';
 import { CustomerInterface } from 'src/app/interfaces/customers';
 import { FormControl } from '@angular/forms';
+import { SaleInterface, SaleSerializer } from 'src/app/interfaces/sales';
 
 @Component({
   selector: 'app-sale-create',
@@ -17,17 +18,21 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./sale-create.component.css']
 })
 export class SaleCreateComponent implements OnInit, OnDestroy {
+  public sale: SaleSerializer = new SaleSerializer();
   public carts: CartPaginationInterface;
   public customer: CustomerInterface;
   public cartSummary: CartSummaryInterface;
+  public date: NgbDateStruct;
 
   constructor(
     private modalService: NgbModal,
-    private cartService: CartService
+    private cartService: CartService,
+    public calendarService: NgbCalendar
   ) { }
 
   ngOnInit(): void {
     this.allCart();
+    this.date = this.calendarService.getToday();
   }
   
   @HostListener('window:beforeunload', ['$event'])
@@ -81,6 +86,7 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
     this.modalService.open(CustomerChoiceComponent).result.then(
       (close: CustomerInterface) => {
         this.customer = close;
+        this.sale.customer = close.id;
       },
       (dismiss: any) => {}
     )
@@ -136,6 +142,9 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
     const sub = this.cartService.summary().subscribe(
       (response: CartSummaryInterface) => {
         this.cartSummary = response;
+        this.sale.total_after = response.summary;
+        this.sale.total = response.summary;
+        this.sale.calculates();
         sub.unsubscribe();
       },
       (error: any) => {
@@ -158,6 +167,16 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
         alert(error);
       }
     );
+  }
+
+  public create() {
+    const date = {
+      year: this.date.year.toString(),
+      month: this.date.month.toString(),
+      day: this.date.day.toString()
+    }
+    this.sale.setSaleDateFromJSON(date);
+    console.log(JSON.stringify(this.sale));
   }
 
 }

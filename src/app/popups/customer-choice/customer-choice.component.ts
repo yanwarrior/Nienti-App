@@ -11,6 +11,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 export class CustomerChoiceComponent implements OnInit {
   public customers: CustomerPaginationInterface;
   public customer: CustomerInterface;
+  public query: string;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -29,6 +30,21 @@ export class CustomerChoiceComponent implements OnInit {
       (error: any) => {
         console.log(error);
         this.activeModal.dismiss(false);
+        alert(error);
+      }
+    );
+  }
+
+  public search() {
+    const sub = this.customerService.search(this.query).subscribe(
+      (response: CustomerPaginationInterface) => {
+        this.customers = response;
+        sub.unsubscribe();
+      }, 
+      (error: any) => {
+        console.log(error);
+        this.activeModal.dismiss(false);
+        sub.unsubscribe();
         alert(error);
       }
     );

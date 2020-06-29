@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CartInterface, CartPaginationInterface } from '../interfaces/sales';
+import { CartInterface, CartPaginationInterface } from '../interfaces/carts';
 import { retry, catchError, debounceTime } from 'rxjs/operators';
 import { CartSummaryInterface } from '../interfaces/carts';
 import { HandThumbsDown } from 'ngx-bootstrap-icons';
