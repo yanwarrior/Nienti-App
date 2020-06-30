@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCreateComponent } from 'src/app/popups/product-create/product-create.component';
 import { ProductEditComponent } from 'src/app/popups/product-edit/product-edit.component';
 import { ProductDeleteComponent } from 'src/app/popups/product-delete/product-delete.component';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-products',
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   public products: ProductPaginationInterface;
+  public product: ProductInterface;
   public query: string = '';
 
   constructor(
@@ -27,10 +28,10 @@ export class ProductsComponent implements OnInit {
 
   public all() {
     this.productService.all().subscribe(
-      (response) => {
+      (response: ProductPaginationInterface) => {
         this.products = response;
       },
-      (error) => {
+      (error: any) => {
         console.log(error);
         alert(error);
       }
@@ -39,10 +40,10 @@ export class ProductsComponent implements OnInit {
 
   public search() {
     this.productService.search(this.query).subscribe(
-      (response) => {
+      (response: ProductPaginationInterface) => {
         this.products = response;
       },  
-      (error) => {
+      (error: any) => {
         console.log(error);
         alert(error);
       }
@@ -52,8 +53,7 @@ export class ProductsComponent implements OnInit {
   public paginate(cursor: string) {
     this.productService.paginate(cursor).subscribe(
       (response) => {
-        this.products.results.push(...response.results);
-        this.products.next = response.next;
+        this.products = response;
       },
       (error) => {
         console.log(error);
@@ -75,6 +75,10 @@ export class ProductsComponent implements OnInit {
     );
   }
 
+  public select(product: ProductInterface) {
+    this.product = product;
+  }
+
   public update(product: ProductInterface) {
     const modalRef = this.modalService.open(ProductEditComponent);
     modalRef.componentInstance.product = product;
@@ -87,7 +91,10 @@ export class ProductsComponent implements OnInit {
     modalRef.result.then(
       (close: boolean) => {
         this.all();
+      }, 
+      (dismiss: any) => {
+        console.log(dismiss);
       }
-    )
+    );
   }
 }

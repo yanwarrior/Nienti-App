@@ -9,10 +9,10 @@
           Are you sure you want to delete <strong>{{ product.name }}</strong>.
           Deleted data cannot be restored anymore.
         </p>
-      </div>
+    </div>
       <div class="modal-footer">
         <button (click)="delete()" class="btn btn-light" type="button" data-dismiss="modal">Yes, Sure!</button>
-        <button (click)="activeModal.close(false)" class="btn btn-success" type="button">No</button>
+        <button (click)="activeModal.dismiss(false)" class="btn btn-success" type="button">No</button>
       </div>
     </div>
   </div>

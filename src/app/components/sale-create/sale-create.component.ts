@@ -6,12 +6,12 @@ import { ProductMultichoiceComponent } from 'src/app/popups/product-multichoice/
 import { forkJoin } from 'rxjs';
 import { CartInterface, CartPaginationInterface } from 'src/app/interfaces/carts';
 import { CartSerializer, CartSummaryInterface } from 'src/app/interfaces/carts';
-import { tap, debounceTime } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { CustomerChoiceComponent } from 'src/app/popups/customer-choice/customer-choice.component';
 import { CustomerInterface } from 'src/app/interfaces/customers';
-import { FormControl } from '@angular/forms';
-import { SaleInterface, SaleSerializer } from 'src/app/interfaces/sales';
 import { SaleService } from 'src/app/services/sale.service';
+import { SaleSerializer, SaleInterface } from 'src/app/interfaces/sales';
+import { PdfService } from 'src/app/services/pdf.service';
 
 @Component({
   selector: 'app-sale-create',
@@ -29,11 +29,13 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private saleService: SaleService,
     private cartService: CartService,
-    public calendarService: NgbCalendar
+    public calendarService: NgbCalendar,
+    public pdfService: PdfService
   ) { }
 
   ngOnInit(): void {
     this.allCart();
+    this.generateSaleNumber();
     this.date = this.calendarService.getToday();
   }
   
@@ -146,7 +148,7 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
         this.cartSummary = response;
         this.sale.total_after = response.summary;
         this.sale.total = response.summary;
-        this.sale.calculates();
+        this.calculate();
         sub.unsubscribe();
       },
       (error: any) => {
@@ -171,26 +173,42 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
     );
   }
 
-  public create() {
-    const date = {
-      year: this.date.year.toString(),
-      month: this.date.month.toString(),
-      day: this.date.day.toString()
-    }
-    this.sale.setSaleDateFromJSON(date);
+  public generateSaleNumber() {
+    this.sale.sale_number = Math.random().toString(36).substr(2, 9);
+  }
 
+  public calculate() {
+    this.sale.total_after = (this.sale.total - this.sale.discount) + this.sale.tax;
+    this.sale.change = this.sale.pay - this.sale.total_after;
+  }
+
+  public create() {
+    this.sale.sale_date = `${this.date.year}-${this.date.month}-${this.date.day}`;
     const sub = this.saleService.create(this.sale).subscribe(
-      (response) => {
-        this.allCart();
-        this.sale.generateSaleNumber();
+      (response: SaleSerializer) => {
+        this.sale = response;
+        const conf = confirm('Are you print pdf?');
+        if (conf) {
+          const sub2 = this.saleService.invoice(response.id).subscribe(
+            (response: any) => {
+              this.pdfService.printInvoice(response);
+              sub2.unsubscribe();
+            },
+            (error: any) => {
+              console.log(error);
+              sub2.unsubscribe();
+              alert(error);
+            }
+          );
+        }
         sub.unsubscribe();
       },
-      (error) => {
+      (error: any) => {
         console.log(error);
         sub.unsubscribe();
         alert(error);
       }
-    )
+    );
   }
 
 }

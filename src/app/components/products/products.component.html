@@ -1,52 +1,39 @@
-<app-navigation>
-  <app-subnav>
-    <span title>Products</span>
-    <input 
-      (keyup.enter)="search()" [(ngModel)]="query" 
-      search class="form-control mr-sm-2" type="search" 
-      placeholder="search" aria-label="Search" 
-    />
-    <button 
-      (click)="create()" actions
-      class="btn btn-success my-2 my-sm-0"
-    >
-      Create
-    </button>
-  </app-subnav>
-  <div class="row mb-4">
+<app-navigation title="Products">
+  <button actions (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">New</button>
+  <div content class="row">
     <div class="col-md-12">
-      <app-empty *ngIf="!products || products.results.length == 0"></app-empty>
-      <div *ngIf="products && products.results.length > 0" class="card shadow">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Unit</th>
-                <th scope="col">Price</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of products.results">
-                <td>{{ product.name }}</td>
-                <td>{{ product.unit }}</td>
-                <td>{{ product.price | currency:'Rp. ':'symbol':'3.0'  }}</td>
-                <td>{{ product.stock }}</td>
-                <td>
-                  <button (click)="delete(product)" class="btn btn-light btn-sm">Delete</button>
-                  <button (click)="update(product)" class="btn btn-outline-success btn-sm ml-2">Edit</button>
-                </td>
-              </tr>
-              <tr *ngIf="products.next" class="bg-light">
-                <td (click)="paginate(products.next)" style="cursor: pointer;" class="text-center text-success" colspan="5">
-                  More
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input (keyup.enter)="search()" [(ngModel)]="query" type="search" class="form-control" placeholder="Search products">
+            <small class="form-text text-muted">Please press enter when you can search.</small>
+          </div>
+          <app-empty *ngIf="products && products.results.length == 0"></app-empty>
         </div>
+        <ul *ngIf="products && products.results.length > 0" class="list-group list-group-flush">
+          <li *ngFor="let prd of products.results" class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-success">
+              {{ prd.name }}
+            </span>
+            <span class="badge badge-light badge-pill">{{ prd.price | currency }}/{{ prd.unit | uppercase }}</span>
+            <span class="badge badge-light badge-pill">
+              {{ prd.stock }} in stocks
+            </span>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group ml-2" role="group" aria-label="First group">
+                <button (click)="delete(prd)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="trash"></i-bs>
+                </button>
+                <button (click)="update(prd)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="pencil"></i-bs>
+                </button>
+              </div>
+            </div>
+          </li>
+          <li *ngIf="products.next" (click)="paginate(products.next)" style="cursor: pointer;" class="list-group-item text-center">
+            More
+          </li>
+        </ul>
       </div>
     </div>
   </div>

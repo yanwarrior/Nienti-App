@@ -1,202 +1,39 @@
-<app-navigation>
-  <app-subnav>
-    <span title>Suppliers</span>
-    <input (keyup.enter)="search()" [(ngModel)]="query" search class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button (click)="create()" actions class="btn btn-success my-2 my-sm-0">Create</button>
-  </app-subnav>
-  <div class="row mb-4">
+<app-navigation title="Suppliers">
+  <button actions (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">New</button>
+  <div content class="row">
     <div class="col-md-12">
-      <app-empty *ngIf="!suppliers"></app-empty>
-      <div *ngIf="suppliers" class="card shadow">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let supplier of suppliers.results">
-                <td>{{ supplier.name }}</td>
-                <td>{{ supplier.phone }}</td>
-                <td class="text-truncate">{{ supplier.address }}</td>
-                <td>
-                  <button (click)="delete(supplier)" class="btn btn-light btn-sm">Delete</button>
-                  <button (click)="update(supplier)" class="btn btn-outline-success btn-sm ml-2">Edit</button>
-                </td>
-              </tr>
-              <tr *ngIf="suppliers.next" class="bg-light">
-                <td (click)="paginate(suppliers.next)" style="cursor: pointer;" class="text-center text-success" colspan="4">
-                  More
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input (keyup.enter)="search()" [(ngModel)]="query" type="search" class="form-control" placeholder="Search suppliers" />
+            <small class="form-text text-muted">Please press enter when you can search.</small>
+          </div>
+          <app-empty *ngIf="suppliers && suppliers.results.length == 0"></app-empty>
         </div>
-      </div>
-    </div>
-  </div>
-</app-navigation>
-<!--
-<app-navigation>
-  <app-subnav subnav>
-    <h1>Suppliers</h1>
-    <p>
-      Manage your suppliers to make Nienti work better for you
-    </p>
-    <button (click)="create()" class="btn btn-light">
-      New Supplier
-    </button>
-  </app-subnav>
-  <app-empty *ngIf="!suppliers"></app-empty>
-  <div *ngIf="suppliers" class="container mt-4" style="margin-top: -75px !important;">
-    <div class="row">
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-body">
-            <div class="input-group">
-              <input
-                type="text"
-                (keyup.enter)="search()"
-                [(ngModel)]="query"
-                class="form-control"
-                placeholder="Search suppliers..."
-              />
-              <div class="input-group-append">
-                <button 
-                  (click)="search()" 
-                  class="btn btn-success" 
-                  type="button"
-                >
-                  Search
+        <ul *ngIf="suppliers && suppliers.results.length > 0" class="list-group list-group-flush">
+          <li *ngFor="let supplier of suppliers.results" class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-success">
+              {{ supplier.name }}
+            </span>
+            <span class="badge badge-light badge-pill">
+              {{ supplier.phone }}
+            </span>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group ml-2" role="group" aria-label="First group">
+                <button (click)="delete(supplier)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="trash"></i-bs>
+                </button>
+                <button (click)="update(supplier)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="pencil"></i-bs>
                 </button>
               </div>
             </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let supplier of suppliers.results" class="list-group-item">
-              <div class="row">
-                <div class="col">
-                  <h1 class="display-4" style="font-size: 25px;">{{ supplier.name }}</h1>
-                  <p class="lead text-break" style="font-size: 15px;">{{ supplier.address }}</p>
-                </div>
-                <div class="col">
-                  <div class="btn-toolbar d-xl-flex justify-content-xl-end">
-                    <div role="group" class="btn-group">
-                      <button (click)="delete(supplier)" class="btn btn-outline-success" type="button">
-                        Remove
-                      </button>
-                      <button (click)="update(supplier)" class="btn btn-success" type="button">
-                        Edit
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li
-              *ngIf="suppliers.next" 
-              (click)="paginate(suppliers.next)"
-              style="cursor: pointer;" 
-              class="list-group-item d-xl-flex justify-content-xl-center align-items-xl-center"
-            >
-              <span class="text-muted">More</span>
-            </li>
-          </ul>
-        </div>
+          </li>
+          <li *ngIf="suppliers.next" (click)="paginate(suppliers.next)" style="cursor: pointer;" class="list-group-item text-center">
+            More
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </app-navigation>
--->
-<!-- <app-navigation></app-navigation>
-
-<div class="container" style="margin-top: 37px;">
-  <h4 class="display-4 text-center" style="margin-top: 6px;font-size: 40px;">
-    Suppliers
-  </h4>
-</div>
-
-<div class="container mb-4" style="margin-bottom: 35px;">
-  <p class="lead text-center" style="font-size: 18px;">
-    Manage your supplier for better purchasing<br />
-  </p>
-</div> -->
-<!-- 
-<div class="container d-md-flex justify-content-center align-items-center align-content-center align-items-md-center">
-  <div role="group" class="btn-group">
-    <button [routerLink]="['/dashboard']" class="btn btn-secondary" type="button">Back</button>
-    <button (click)="create()" class="btn btn-success" type="button">New Supplier</button>
-  </div>
-</div>
-
-<div *ngIf="isEmpty" class="container" style="margin-top: 48px;">
-  <div class="row justify-content-center">
-    <div class="col-5 text-center d-xl-flex justify-content-xl-center align-items-xl-center">
-      <img src="assets/no-data.png" />
-    </div>
-  </div>
-</div> -->
-<!-- 
-<div *ngIf="!isEmpty" class="container" style="margin-top: 48px;">
-  <div class="row">
-      <div class="col-12">
-        <div class="card shadow mb-4">
-          <div class="card-body" style="padding-top: 0px;">
-            <input 
-              type="search"
-              class="bg-light form-control mt-4"
-              placeholder="Search suppliers"
-              style="margin-top: 3px;"
-              [(ngModel)]="query"
-              (keyup.enter)="search()"
-            />
-          </div>
-          <ul class="list-group list-group-flush" >
-            <li *ngFor="let supplier of suppliers.results" class="list-group-item">
-                <div class="row">
-                  <div class="col">
-                    <h1 style="font-size: 18px;">{{ supplier.name }}</h1>
-                    <p class="lead" style="font-size: 14px;">
-                      {{ supplier.address }}
-                    </p>
-                  </div>
-                  <div class="col text-right d-lg-flex justify-content-lg-end align-items-lg-center">
-                    <div role="group" class="btn-group">
-                      <button (click)="delete(supplier)" class="btn btn-outline-light text-dark" type="button">Delete</button>
-                      <button (click)="update(supplier)" class="btn btn-success" type="button">Edit</button>
-                    </div>
-                  </div>
-                </div>
-            </li>
-            <li 
-              *ngIf="suppliers.next" 
-              class="list-group-item d-md-flex justify-content-md-center"
-              (click)="paginate(suppliers.next)"
-              style="cursor: pointer;"
-            >
-              <span class="text-center">More</span>
-            </li> -->
-            <!-- <button (click)="update(supplier)" class="list-group-item list-group-item-action" *ngFor="let supplier of suppliers.results">
-              <h1 style="font-size: 18px;">{{ supplier.name }}</h1>
-              <p class="lead" style="font-size: 14px;">
-                {{ supplier.address }}
-              </p>
-            </button>
-            <button
-              *ngIf="suppliers.next"
-              class="list-group-item list-group-item-action d-md-flex justify-content-md-center"
-              (click)="paginate(suppliers.next)"
-            >
-              <span class="text-center">
-                More
-              </span>
-            </button> -->
-          <!-- </ul> 
-        </div>
-      </div>
-  </div>
-</div> -->

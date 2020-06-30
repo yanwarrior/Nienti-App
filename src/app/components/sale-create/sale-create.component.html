@@ -1,5 +1,5 @@
 <app-navigation [title]="'Sales Order #' + sale.sale_number ">
-  <button actions [disabled]="!sale.isReady()" (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">Save</button>
+  <button actions (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">Save</button>
   <div content class="row">
     <div class="col-md-8">
       <div class="card">
@@ -71,19 +71,19 @@
               <tr>
                 <th>Discount</th>
                 <td>
-                  <input [(ngModel)]="sale.discount" (ngModelChange)="sale.calculates()" type="number" class="form-control form-control-sm col-4" />
+                  <input [(ngModel)]="sale.discount" (keyup)="calculate()" type="number" class="form-control form-control-sm col-4" />
                 </td>
               </tr>
               <tr>
                 <th>Tax</th>
                 <td>
-                  <input [(ngModel)]="sale.tax" (ngModelChange)="sale.calculates()" type="number" class="form-control form-control-sm col-4" />
+                  <input [(ngModel)]="sale.tax" (keyup)="calculate()" type="number" class="form-control form-control-sm col-4" />
                 </td>
               </tr>
               <tr>
                 <th>Pay</th>
                 <td>
-                  <input [(ngModel)]="sale.pay" (ngModelChange)="sale.calculates()" type="number" class="form-control form-control-sm col-4" />
+                  <input [(ngModel)]="sale.pay" (keyup)="calculate()" type="number" class="form-control form-control-sm col-4" />
                 </td>
               </tr>
               <tr>

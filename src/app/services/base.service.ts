@@ -19,6 +19,7 @@ export class BaseService {
     if (error.error instanceof ErrorEvent) {
       console.log('An error occured: ', error.error.message);
     } else {
+      console.log(error);
       console.log(
         `Backend returned code ${error.status},` + 
         `body was: ${error.error}`

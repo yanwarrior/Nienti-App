@@ -1,43 +1,39 @@
-<app-navigation>
-  <app-subnav>
-    <span title>Customers</span>
-    <input (keyup.enter)="search()" [(ngModel)]="query" search class="form-control mr-sm-2" type="search" placeholder="search" aria-label="Search" />
-    <button (click)="create()" actions class="btn btn-success my-2 my-sm-0">Create</button>
-  </app-subnav>
-  <div class="row mb-4">
+<app-navigation title="Customers">
+  <button actions (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">New</button>
+  <div content class="row">
     <div class="col-md-12">
-      <app-empty *ngIf="!customers || customers.results.length == 0"></app-empty>
-      <div *ngIf="customers && customers.results.length > 0" class="card shadow">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Email</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let customer of customers.results">
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.phone }}</td>
-                <td>{{ customer.email }}</td>
-                <td class="text-truncate">{{ customer.address }}</td>
-                <td>
-                  <button (click)="delete(customer)" class="btn btn-light btn-sm">Delete</button>
-                  <button (click)="update(customer)" class="btn btn-outline-success btn-sm ml-2">Edit</button>
-                </td>
-              </tr>
-              <tr *ngIf="customers.next" class="bg-light">
-                <td (click)="paginate(customers.next)" style="cursor: pointer;" class="text-center text-success" colspan="5">
-                  More
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input (keyup.enter)="search()" [(ngModel)]="query" type="search" class="form-control" placeholder="Search customers" />
+            <small class="form-text text-muted">Please press enter when you can search.</small>
+          </div>
+          <app-empty *ngIf="customers && customers.results.length == 0"></app-empty>
         </div>
+        <ul *ngIf="customers && customers.results.length > 0" class="list-group list-group-flush">
+          <li *ngFor="let customer of customers.results" class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-success">
+              {{ customer.name }}
+            </span>
+            <span class="badge badge-light badge-pill">{{ customer.email }}</span>
+            <span class="badge badge-light badge-pill">
+              {{ customer.phone }}
+            </span>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group ml-2" role="group" aria-label="First group">
+                <button (click)="delete(customer)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="trash"></i-bs>
+                </button>
+                <button (click)="update(customer)" type="button" class="btn btn-light btn-sm">
+                  <i-bs name="pencil"></i-bs>
+                </button>
+              </div>
+            </div>
+          </li>
+          <li *ngIf="customers.next" (click)="paginate(customers.next)" style="cursor: pointer;" class="list-group-item text-center">
+            More
+          </li>
+        </ul>
       </div>
     </div>
   </div>
