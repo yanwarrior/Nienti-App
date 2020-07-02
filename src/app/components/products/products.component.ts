@@ -53,7 +53,8 @@ export class ProductsComponent implements OnInit {
   public paginate(cursor: string) {
     this.productService.paginate(cursor).subscribe(
       (response) => {
-        this.products = response;
+        this.products.results.push(...response.results)
+        this.products.next = response.next;
       },
       (error) => {
         console.log(error);

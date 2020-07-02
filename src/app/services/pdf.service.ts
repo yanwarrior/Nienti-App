@@ -12,7 +12,7 @@ export class PdfService {
     this.pdf.vfs = pdfFonts.pdfMake.vfs;
   }
 
-  public printInvoice(docDef: any) {
+  public print(docDef: any) {
     this.pdf.createPdf(docDef).open();
   }
 }

@@ -13,13 +13,10 @@ export interface CustomerPaginationInterface {
   results: CustomerInterface[];
 }
 
-
-
-
 export class CustomerSerializer implements CustomerInterface {
   public id: number;
-  public name: string;
-  public address: string;
-  public phone: string;
-  public email: string;
+  public name: string = '';
+  public address: string = '';
+  public phone: string = '';
+  public email: string = '';
 }

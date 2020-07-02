@@ -1,0 +1,52 @@
+<app-navigation title="Sales Orders">
+  <button actions (click)="reportSales()" class="btn btn-outline-light ml-2">Report</button>
+  <button actions [routerLink]="['/sale-create']" class="btn btn-light ml-2">New</button>
+  <div content class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input (keyup.enter)="search()" [(ngModel)]="query" type="text" class="form-control" type="search" placeholder="Search sales orders">
+            <small class="form-text text-muted">Please press enter when you can search.</small>
+          </div>
+          <app-empty *ngIf="sales && sales.results.length < 0"></app-empty>
+        </div>
+        <ul *ngIf="sales && sales.results.length > 0" class="list-group list-group-flush">
+          <li *ngFor="let sale of sales.results" class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-success">
+              {{ sale.sale_number }}
+            </span>
+            <span class="badge badge-light badge-pill">{{ sale._customer_name }}</span>
+            <span class="badge badge-light badge-pill">
+              {{ sale.sale_date }}
+            </span>
+            <span class="text-info">
+              {{ sale.total_after | currency }}
+            </span>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <div class="btn-group ml-2" role="group" aria-label="First group" >
+                <button (click)="invoice(sale)" ngbTooltip="Sales order invoice" type="button" class="btn btn-light btn-sm">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
+                    <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z"/>
+                    <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                  </svg>
+                </button>
+                <button (click)="deliveryOrders(sale)" class="btn btn-light" ngbTooltip="Delivery orders">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-truck" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5v7h-1v-7a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5v1A1.5 1.5 0 0 1 0 10.5v-7zM4.5 11h6v1h-6v-1z"/>
+                    <path fill-rule="evenodd" d="M11 5h2.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5h-1v-1h1a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4.5h-1V5zm-8 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                    <path fill-rule="evenodd" d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </li>
+          <li *ngIf="sales.next" (click)="paginate(sales.next)" style="cursor: pointer;" class="list-group-item text-center">
+            More
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</app-navigation>

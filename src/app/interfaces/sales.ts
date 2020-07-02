@@ -10,6 +10,7 @@ export interface SaleInterface {
   tax: number;
   pay: number;
   change: number;
+  _customer_name: string;
 }
 
 export class SaleSerializer implements SaleInterface {
@@ -24,12 +25,23 @@ export class SaleSerializer implements SaleInterface {
   tax: number = 0;
   pay: number = 0;
   change: number = 0;
+  _customer_name: string = '';
+}
+
+export interface SaleReportInterface {
+  start_date: string;
+  end_date: string;
+}
+
+export class SaleReportSerializer implements SaleReportInterface {
+  start_date: string;
+  end_date: string;
 }
 
 export interface SalePaginationInterface {
   next: string;
   previous: string;
-  sales: SaleInterface[];
+  results: SaleInterface[];
 }
 
 export interface ItemInterface {

@@ -12,6 +12,8 @@ import { CustomerInterface } from 'src/app/interfaces/customers';
 import { SaleService } from 'src/app/services/sale.service';
 import { SaleSerializer, SaleInterface } from 'src/app/interfaces/sales';
 import { PdfService } from 'src/app/services/pdf.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sale-create',
@@ -30,7 +32,9 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
     private saleService: SaleService,
     private cartService: CartService,
     public calendarService: NgbCalendar,
-    public pdfService: PdfService
+    public pdfService: PdfService,
+    public location: Location,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,20 +45,27 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
   
   @HostListener('window:beforeunload', ['$event'])
   ngOnDestroy(): void {
-    if (this.carts.results.length > 0) {
-      alert("You haven't finished it yet. Unsaved data will be deleted!");
-
-      const sub = this.cartService.clear().subscribe(
-        (response: any) => {
-          sub.unsubscribe();
-        },
-        (error: any) => {
-          console.log(error);
-          alert(error);
-          sub.unsubscribe();
+    this.cartService.all().subscribe(
+      (response: CartPaginationInterface) => {
+        if (response.results.length > 0) {
+          alert("You haven't finished it yet. Unsaved data will be deleted!");
+          const sub = this.cartService.clear().subscribe(
+            (response: any) => {
+              sub.unsubscribe();
+            },
+            (error: any) => {
+              console.log(error);
+              alert(error);
+              sub.unsubscribe();
+            }
+          );
         }
-      );
-    }
+      },
+      (error: any) => {
+        console.log(error);
+        alert(error);
+      }
+    )
   }
 
   public browseProducts() {
@@ -191,8 +202,9 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
         if (conf) {
           const sub2 = this.saleService.invoice(response.id).subscribe(
             (response: any) => {
-              this.pdfService.printInvoice(response);
+              this.pdfService.print(response);
               sub2.unsubscribe();
+              this.router.navigate(['sales-orders']);
             },
             (error: any) => {
               console.log(error);
@@ -200,6 +212,8 @@ export class SaleCreateComponent implements OnInit, OnDestroy {
               alert(error);
             }
           );
+        } else {
+          this.router.navigate(['sales-orders']);
         }
         sub.unsubscribe();
       },

@@ -7,6 +7,7 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { SaleCreateComponent } from './components/sale-create/sale-create.component';
+import { SalesComponent } from './components/sales/sales.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'sale-create',
     component: SaleCreateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sales-orders',
+    component: SalesComponent,
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

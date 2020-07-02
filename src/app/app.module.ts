@@ -32,6 +32,8 @@ import { CustomerDeleteComponent } from './popups/customer-delete/customer-delet
 import { ProductMultichoiceComponent } from './popups/product-multichoice/product-multichoice.component';
 import { SaleCreateComponent } from './components/sale-create/sale-create.component';
 import { CustomerChoiceComponent } from './popups/customer-choice/customer-choice.component';
+import { SalesComponent } from './components/sales/sales.component';
+import { SaleReportComponent } from './popups/sale-report/sale-report.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { CustomerChoiceComponent } from './popups/customer-choice/customer-choic
     ProductMultichoiceComponent,
     SaleCreateComponent,
     CustomerChoiceComponent,
+    SalesComponent,
+    SaleReportComponent,
   ],
   imports: [
     BrowserModule,

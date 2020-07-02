@@ -1,5 +1,8 @@
 <app-navigation [title]="'Sales Order #' + sale.sale_number ">
-  <button actions (click)="create()" class="btn btn-light my-2 ml-4 my-sm-0">Save</button>
+  <div actions class="btn-group ml-4" role="group">
+    <button (click)="location.back()" class="btn btn-outline-light my-2 my-sm-0">Discard</button>
+    <button (click)="create()" class="btn btn-light my-2 my-sm-0">Save</button>
+  </div>
   <div content class="row">
     <div class="col-md-8">
       <div class="card">
