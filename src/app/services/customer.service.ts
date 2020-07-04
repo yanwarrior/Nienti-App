@@ -16,6 +16,7 @@ export class CustomerService {
   ) { }
 
   all(): Observable<CustomerPaginationInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/customers/`;
     return this.httpClient.get<CustomerPaginationInterface>(url, this.baseService.httpOptions)
       .pipe(
@@ -25,6 +26,7 @@ export class CustomerService {
   }
 
   search(search: string): Observable<CustomerPaginationInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/customers/`;
     this.baseService.httpOptions['params'] = new HttpParams().set('search', search);
 
@@ -36,6 +38,7 @@ export class CustomerService {
   }
 
   paginate(cursor: string): Observable<CustomerPaginationInterface> {
+    this.baseService.clearParams();
     return this.httpClient.get<CustomerPaginationInterface>(cursor, this.baseService.httpOptions)
       .pipe(
         retry(2),
@@ -44,6 +47,7 @@ export class CustomerService {
   }
 
   create(customer: CustomerInterface): Observable<CustomerInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/customers/`;
     return this.httpClient.post<CustomerInterface>(url, customer, this.baseService.httpOptions)
       .pipe(
@@ -53,6 +57,7 @@ export class CustomerService {
   }
 
   update(customer: CustomerInterface): Observable<CustomerInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/customers/${customer.id}/`;
     return this.httpClient.put<CustomerInterface>(url, customer, this.baseService.httpOptions)
       .pipe(
@@ -62,6 +67,7 @@ export class CustomerService {
   }
 
   delete(id: number): Observable<any> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/customers/${id}/`;
     return this.httpClient.delete<any>(url, this.baseService.httpOptions)
       .pipe(
