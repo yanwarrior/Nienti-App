@@ -21,13 +21,14 @@ export class ProductSerializer implements ProductInterface {
   stock: number;
 }
 
-export class ProductPaginationSerializer implements ProductPaginationInterface {
-  previous: string;
-  next: string;
-  count: number;
-  results: ProductSerializer[];
+export interface ProductFilterInterface {
+  stock__gte?: number;
+  stock__lte?: number;
+  stock__exact?: number;
+}
 
-  public isEmpty(): boolean {
-    return this.results.length == 0;
-  }
+export class ProductFilterSerializer implements ProductFilterInterface {
+  stock__gte?: number;
+  stock__lte?: number;
+  stock__exact?: number;
 }

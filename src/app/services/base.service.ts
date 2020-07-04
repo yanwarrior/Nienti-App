@@ -10,10 +10,16 @@ export class BaseService {
   public httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }),
+    params: null
   };
 
-  constructor() { }
+  constructor() {
+  }
+
+  public clearParams() {
+    this.httpOptions['params'] = null;
+  }
 
   public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

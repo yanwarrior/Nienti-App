@@ -4,6 +4,8 @@ import { SaleService } from 'src/app/services/sale.service';
 import { PdfService } from 'src/app/services/pdf.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SaleReportComponent } from 'src/app/popups/sale-report/sale-report.component';
+
+
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',

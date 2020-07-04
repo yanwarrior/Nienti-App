@@ -31,13 +31,15 @@
             </tbody>
             <tbody *ngIf="carts && carts.results.length > 0">
               <tr *ngFor="let cart of carts.results"> 
-                <td class="text-success text-sm-left">{{ cart.name }} {{ cart.stock }}{{ cart.unit }}</td>
-                <td>{{ cart.price | currency }}</td>
+                <td [ngbTooltip]="cart.name" class="text-success text-truncate text-sm-left">
+                  {{ cart.name }} {{ cart.stock }}{{ cart.unit }}
+                </td>
+                <td>{{ cart.price | currency:'IDR ':'symbol':'3.0' }}</td>
                 <td>
-                  <input [(ngModel)]="cart.quantity" (keyup.enter)="updateCart(cart)" type="number" class="form-control form-control-sm col-3" />
+                  <input [(ngModel)]="cart.quantity" (keyup.enter)="updateCart(cart)" type="number" class="form-control form-control-sm" />
                   <small class="help text-muted">Press enter after fill</small>
                 </td>
-                <td>{{ cart.subtotal | currency }}</td>
+                <td>{{ cart.subtotal | currency:'IDR ':'symbol':'3.0' }}</td>
                 <td>
                   <button (click)="deleteCart(cart)" class="btn btn-sm btn-light float-right">
                     <i-bs name="trash-fill"></i-bs>
@@ -46,7 +48,7 @@
               </tr>
               <tr *ngIf="cartSummary">
                 <td>Total</td>
-                <td colspan="3" class="text-right">{{ cartSummary.summary | currency }}</td>
+                <td colspan="3" class="text-right">{{ cartSummary.summary | currency:'IDR ':'symbol':'3.0' }}</td>
                 <td></td>
               </tr>
             </tbody>
@@ -69,7 +71,7 @@
             <tbody>
               <tr>
                 <th>Total Price</th>
-                <td>{{ sale.total_after | currency }}</td>
+                <td>{{ sale.total_after | currency:'IDR ':'symbol':'3.0' }}</td>
               </tr>
               <tr>
                 <th>Discount</th>
@@ -91,7 +93,7 @@
               </tr>
               <tr>
                 <th>Change</th>
-                <td>{{ sale.change | currency }}</td>
+                <td>{{ sale.change | currency:'IDR ':'symbol':'3.0' }}</td>
               </tr>
             </tbody>
           </table>

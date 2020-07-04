@@ -21,7 +21,7 @@
               {{ sale.sale_date }}
             </span>
             <span class="text-info">
-              {{ sale.total_after | currency }}
+              {{ sale.total_after | currency:'IDR ':'symbol':'3.0' }}
             </span>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group ml-2" role="group" aria-label="First group" >
@@ -49,4 +49,5 @@
       </div>
     </div>
   </div>
+  
 </app-navigation>

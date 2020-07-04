@@ -1,50 +1,39 @@
-<app-navigation>
-  <app-subnav>
-    <span title>Dashboard</span>
-    <input search class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button actions class="btn btn-outline-success my-2 my-sm-0">New</button>
-  </app-subnav>
-  <div class="row mb-4">
-    <div class="col-md-4">
-      <div class="card shadow">
+<app-navigation title="Dashboard">
+  <div content class="row">
+    <div *ngIf="items && items.length > 0" class="col-md-12 mb-4">
+      <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Suppliers</h5>
-          <p class="card-text">123,000 Suppliers</p>
+          <h4 class="card-title">The 5 best-selling items</h4>
+          <div class="form-group" *ngFor="let item of items">
+            <label>{{ item.name }} <span class="badge badge-light badge-pill">{{ item.sold }} sold!</span></label>
+            <ngb-progressbar type="success" [value]="item.sum_quantity">
+              {{ item.sold }}
+            </ngb-progressbar>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow">
+
+    <div class="col-md-12">
+      <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Customers</h5>
-          <p class="card-text">123,000 Customers</p>
+          <h4 class="card-title">Out of stocks</h4>
+          <app-empty *ngIf="products && products.results.length == 0"></app-empty>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title">Products</h5>
-          <p class="card-text">123,000 Products</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title">Sales Order</h5>
-          <p class="card-text">123,000 Sales order</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title">Purchasing</h5>
-          <p class="card-text">123,000 Purchase</p>
-        </div>
+        <ul *ngIf="products && products.results.length > 0" class="list-group list-group-flush">
+          <li *ngFor="let product of products.results" class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="text-success">
+              {{ product.name }}
+            </span>
+            <span class="badge badge-light badge-pill">{{ product.price | currency }}/{{ product.unit | uppercase }}</span>
+            <span class="badge badge-danger badge-pill">
+              {{ product.stock }} in stocks
+            </span>
+          </li>
+          <li *ngIf="products.next" (click)="paginateProduct(products.next)" style="cursor: pointer;" class="list-group-item text-center">
+            More
+          </li>
+        </ul>
       </div>
     </div>
   </div>

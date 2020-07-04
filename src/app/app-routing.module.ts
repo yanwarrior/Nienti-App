@@ -49,6 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'route', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
   { path: '**', redirectTo: '/login' },
 ];
 

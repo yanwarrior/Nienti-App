@@ -12,7 +12,7 @@
         </div>
         <ul *ngIf="products && products.results.length > 0" class="list-group list-group-flush">
           <li *ngFor="let prd of products.results" class="list-group-item d-flex justify-content-between align-items-center">
-            <span class="text-success">
+            <span class="text-success col-4 text-truncate">
               {{ prd.name }}
             </span>
             <span class="badge badge-light badge-pill">{{ prd.price | currency }}/{{ prd.unit | uppercase }}</span>
