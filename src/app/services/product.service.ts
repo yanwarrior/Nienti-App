@@ -26,6 +26,7 @@ export class ProductService {
   }
 
   choices(): Observable<ProductPaginationInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/products/choices/`;
     return this.httpClient.get<ProductPaginationInterface>(url, this.baseService.httpOptions)
       .pipe(
@@ -56,6 +57,7 @@ export class ProductService {
   }
 
   searchChoices(search: string): Observable<ProductPaginationInterface> {
+    this.baseService.clearParams();
     const url: string = `${this.baseService.baseUrl}/products/choices/`;
     this.baseService.httpOptions['params'] = new HttpParams().set('search', search);
 
@@ -109,5 +111,3 @@ export class ProductService {
       );
   }
 }
-
-// TODO: please remove params when i call another service

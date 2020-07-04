@@ -34,7 +34,6 @@ import { SaleCreateComponent } from './components/sale-create/sale-create.compon
 import { CustomerChoiceComponent } from './popups/customer-choice/customer-choice.component';
 import { SalesComponent } from './components/sales/sales.component';
 import { SaleReportComponent } from './popups/sale-report/sale-report.component';
-import { SalesModule } from './sales/sales.module';
 
 @NgModule({
   declarations: [
@@ -88,7 +87,6 @@ import { SalesModule } from './sales/sales.module';
     NgxBootstrapIconsModule.pick(allIcons),
     NgbPaginationModule,
     NgbAlertModule,
-    SalesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
